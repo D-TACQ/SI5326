@@ -49,7 +49,7 @@
 #include <linux/delay.h>
 
 #define SI5326_DRV_NAME	"si5326"
-#define DRIVER_VERSION		"0.02"
+#define DRIVER_VERSION		"0.03"
 
 const u8 si5326_reset_values[] = {
 	0x14, 0xe4, 0x42, 0x05
@@ -158,9 +158,9 @@ int si5326_init_client(struct i2c_client *client)
 		}else{
 			regs[ir] = rc;
 			if (regs[ir] != si5326_reset_values[ir]){
-				dev_err(&client->dev, "ERROR: register at [%d] %02x not reset value %02x",
-						ir, regs[ir], si5326_reset_values[ir]);
-				fail = 1;
+				dev_warn(&client->dev, 
+				"register at [%d] %02x not reset value %02x",
+				ir, regs[ir], si5326_reset_values[ir]);
 			}
 		}
 	}
