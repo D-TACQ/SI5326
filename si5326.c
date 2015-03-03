@@ -49,7 +49,7 @@
 #include <linux/delay.h>
 
 #define SI5326_DRV_NAME	"si5326"
-#define DRIVER_VERSION		"0.01"
+#define DRIVER_VERSION		"0.02"
 
 const u8 si5326_reset_values[] = {
 	0x14, 0xe4, 0x42, 0x05
@@ -107,7 +107,7 @@ static ssize_t si5326_store_reg(struct device *dev,
 	if (buf[0] == '#'){
 		return count;
 	}else{
-		switch(sscanf(buf, "%x %x", &addr, &value)){
+		switch(sscanf(buf, "%d %x", &addr, &value)){
 		case 2:
 			if(si5326_write_reg(client, addr, value)){
 				return -EIO;
