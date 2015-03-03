@@ -107,7 +107,7 @@ static ssize_t si5326_store_reg(struct device *dev,
 	if (buf[0] == '#'){
 		return count;
 	}else{
-		switch(sscanf(buf, "%d %x", &addr, &value)){
+		switch(sscanf(buf, "%d 0x%x", &addr, &value)){
 		case 2:
 			if(si5326_write_reg(client, addr, value)){
 				return -EIO;
@@ -118,6 +118,7 @@ static ssize_t si5326_store_reg(struct device *dev,
 			data->last_addr = addr;
 			return count;
 		default:
+			dev_err(dev, "si5326_store_reg: FAIL \"%s\"", buf);
 			return -EIO;
 		}
 	}
