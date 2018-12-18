@@ -68,13 +68,14 @@ struct si5326_data {
 
 static int si5326_read_reg(struct i2c_client *client, int reg)
 {
-	//struct si5326_data *data = i2c_get_clientdata(client);
-	return i2c_smbus_read_byte_data(client, reg);
+	int xx = i2c_smbus_read_byte_data(client, reg);
+	dev_dbg(&client->dev, "%s read %2x value %2x", __func__, reg, xx);
+	return xx;
 }
 
 static int si5326_write_reg(struct i2c_client *client, int reg, u8 value)
 {
-	//struct si5326_data *data = i2c_get_clientdata(client);
+	dev_dbg(&client->dev, "%s write %2x %2x", __func__, reg, value);
 	return i2c_smbus_write_byte_data(client, reg, value);
 }
 
