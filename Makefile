@@ -8,4 +8,7 @@ all:
 zynq:
 	./make.zynq
 
+clean:
+	rm -f *.ko *.o *.mod.* modules.order Module.symvers
+
 
